@@ -1,10 +1,13 @@
 const apiKey = "{API key}";
 const apiUrl =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=bangalore";
+  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-async function checkWeather() {
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+
+async function checkWeather(city) {
   try {
-    const response = await fetch(apiUrl + `&appid=${apiKey}`);
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     let data = await response.json();
 
     document.querySelector(".city").innerHTML = data.name;
@@ -17,4 +20,6 @@ async function checkWeather() {
   }
 }
 
-checkWeather();
+searchBtn.addEventListener("click", () => {
+  checkWeather(searchBox.value);
+});
