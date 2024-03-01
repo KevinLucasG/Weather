@@ -15,7 +15,6 @@ async function checkWeather(city) {
     document.querySelector(".temp").innerHTML = data.main.temp + "°c";
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
-    console.log(data);
 
     if (data.weather[0].main == "Clouds") {
       weatherIcon.src = "images/clouds.png";
@@ -28,6 +27,7 @@ async function checkWeather(city) {
     } else if (data.weather[0].main == "Mist") {
       weatherIcon = "images/mist.png";
     }
+    document.querySelector(".weather").style.display = "block";
   } catch {
     alert("An error occurred in the API request");
   }
