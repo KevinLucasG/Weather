@@ -6,6 +6,12 @@ const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
 
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+  alert("Geolocation is not supported by this browser");
+}
+
 async function checkWeather(city) {
   try {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -43,3 +49,12 @@ async function checkWeather(city) {
 searchBtn.addEventListener("click", () => {
   checkWeather(searchBox.value);
 });
+
+function showPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+  console.log(latitude);
+  console.log(longitude);
+
+  const apiURL2 = `${apiUrl}&lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+}
